@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Services | Sri Sai Student Xerox Vijayawada</title>
+    <meta name="description" content="Order xerox, prints, Aadhaar services, PAN card, EAPCET applications online via WhatsApp. Quick pickup in Prasadampadu, Vijayawada.">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/premium.css">
+    <style>
+        .order-form-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+        
+        /* Step Indicator */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 40px;
+        }
+        
+        .step-dot {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 3px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-tertiary);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-dot.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: var(--primary);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+        
+        .step-dot.completed {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+        
+        .step-line {
+            width: 80px;
+            height: 4px;
+            background: var(--border-color);
+            transition: background 0.3s ease;
+        }
+        
+        .step-line.completed {
+            background: #10b981;
+        }
+        
+        /* Slides Container */
+        .slides-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            animation: slideIn 0.4s ease;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .slide-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 1rem;
+        }
+        
+        /* Service Grid */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        
+        .service-card {
+            padding: 28px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+        }
+        
+        .service-card:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.04);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
+        }
+        
+        .service-card.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .service-card input { display: none; }
+        
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 16px;
+            font-size: 1.75rem;
+        }
+        
+        .service-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+        
+        /* Step 2 Dynamic Content */
+        .step2-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .step2-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .detail-section {
+            margin-bottom: 28px;
+        }
+        
+        .detail-label {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .detail-label svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+        }
+        
+        .option-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .option-btn {
+            padding: 14px 22px;
+            border: 2px solid var(--border-color);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            background: white;
+            color: var(--text-primary);
+        }
+        
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+        
+        .option-btn.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .option-btn input { display: none; }
+        
+        .info-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 28px;
+        }
+        
+        .info-box h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-box ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .number-input-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .number-field {
+            flex: 1;
+        }
+        
+        .number-field label {
+            display: block;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+        
+        .number-field input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .number-field input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Step 3 Fields */
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .field-group label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .field-group input {
+            width: 100%;
+            padding: 16px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .field-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 36px;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            padding: 18px 24px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .btn-back {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            flex: 0 0 auto;
+            padding: 18px 28px;
+        }
+        
+        .btn-back:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
+        }
+        
+        .btn-next:disabled, .btn-whatsapp:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        @media (max-width: 640px) {
+            .service-grid { grid-template-columns: repeat(2, 1fr); }
+            .field-row { grid-template-columns: 1fr; }
+            .number-input-row { flex-direction: column; }
+            .order-form-card { padding: 28px 20px; }
+            .step-line { width: 50px; }
+            .nav-buttons { flex-direction: column-reverse; }
+            .btn-back { width: 100%; }
+        }
+            /* Attachment Reminder Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 32px;
+            max-width: 440px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+        
+        .modal-icon {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+        
+        .modal-box h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .modal-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .modal-file-types {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 16px 0 24px;
+            flex-wrap: wrap;
+        }
+        
+        .file-type-badge {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .modal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+        
+        .modal-note {
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/logo.png" alt="Sri Sai Student Xerox" class="logo-icon">
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="order.html" class="nav-link active">Order</a></li>
+                <li><a href="online-applications.html" class="nav-link">Applications</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Place Your <span class="gradient-text">Order</span></h1>
+            <p class="page-subtitle">Quick 3-step order process</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="order-form-card">
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step-dot active" data-step="1">1</div>
+                    <div class="step-line"></div>
+                    <div class="step-dot" data-step="2">2</div>
+                    <div class="step-line"></div>
+                    <div class="step-dot" data-step="3">3</div>
+                </div>
+                
+                <form id="orderForm">
+                    <div class="slides-container">
+                        <!-- SLIDE 1: Select Service -->
+                        <div class="slide active" data-slide="1">
+                            <h2 class="slide-title">Select a Service</h2>
+                            <p class="slide-subtitle">What would you like us to help you with?</p>
+                            
+                            <div class="service-grid">
+                                <label class="service-card" data-service="xerox">
+                                    <input type="radio" name="service" value="xerox">
+                                    <div class="service-icon">🖨️</div>
+                                    <span class="service-name">Xerox / Print</span>
+                                </label>
+                                <label class="service-card" data-service="aadhaar">
+                                    <input type="radio" name="service" value="aadhaar">
+                                    <div class="service-icon">🪪</div>
+                                    <span class="service-name">Aadhaar Update</span>
+                                </label>
+                                <label class="service-card" data-service="pan">
+                                    <input type="radio" name="service" value="pan">
+                                    <div class="service-icon">💳</div>
+                                    <span class="service-name">PAN Card</span>
+                                </label>
+                                <label class="service-card" data-service="lamination">
+                                    <input type="radio" name="service" value="lamination">
+                                    <div class="service-icon">✨</div>
+                                    <span class="service-name">Lamination</span>
+                                </label>
+                                <label class="service-card" data-service="eapcet">
+                                    <input type="radio" name="service" value="eapcet">
+                                    <div class="service-icon">📝</div>
+                                    <span class="service-name">EAPCET</span>
+                                </label>
+                                <label class="service-card" data-service="other">
+                                    <input type="radio" name="service" value="other">
+                                    <div class="service-icon">📋</div>
+                                    <span class="service-name">Other Services</span>
+                                </label>
+                            </div>
+                            
+                            <div class="nav-buttons">
+                                <button type="button" class="nav-btn btn-next" id="toStep2" disabled>
+                                    Continue
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- SLIDE 2: Service Details -->
+                        <div class="slide" data-slide="2">
+                            <h2 class="slide-title" id="step2Title">Service Details</h2>
+                            <p class="slide-subtitle" id="step2Subtitle">Fill in the details for your order</p>
+                            
+                            <!-- XEROX Content -->
+                            <div class="step2-content" id="xerox-content">
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="3" width="12" height="18" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+                                        Black & White or Colour?
+                                    </div>
+                                    <div class="option-grid">
+                                        <label class="option-btn"><input type="radio" name="print-type" value="Black & White">Black & White</label>
+                                        <label class="option-btn"><input type="radio" name="print-type" value="Colour">Colour</label>
+                                    </div>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        Pages & Copies
+                                    </div>
+                                    <div class="number-input-row">
+                                        <div class="number-field">
+                                            <label>Number of Pages</label>
+                                            <input type="number" id="xerox-pages" value="1" min="1">
+                                        </div>
+                                        <div class="number-field">
+                                            <label>Number of Copies</label>
+                                            <input type="number" id="xerox-copies" value="1" min="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                                        Need binding? (Optional)
+                                    </div>
+                                    <div class="option-grid">
+                                        <label class="option-btn selected"><input type="radio" name="binding" value="No Binding" checked>No Binding</label>
+                                        <label class="option-btn"><input type="radio" name="binding" value="Spiral Binding">Spiral Binding</label>
+                                        <label class="option-btn"><input type="radio" name="binding" value="Hard Binding">Hard Binding</label>
+                                        <label class="option-btn"><input type="radio" name="binding" value="Tape Binding">Tape Binding</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- AADHAAR Content -->
+                            <div class="step2-content" id="aadhaar-content">
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                        What update do you need?
+                                    </div>
+                                    <div class="option-grid" id="aadhaar-type-grid">
+                                        <label class="option-btn"><input type="radio" name="aadhaar-type" value="Mobile Number Update">Mobile Number</label>
+                                        <label class="option-btn"><input type="radio" name="aadhaar-type" value="Address Update">Address</label>
+                                        <label class="option-btn"><input type="radio" name="aadhaar-type" value="Name Correction">Name</label>
+                                        <label class="option-btn"><input type="radio" name="aadhaar-type" value="DOB Correction">Date of Birth</label>
+                                        <label class="option-btn"><input type="radio" name="aadhaar-type" value="Photo Update">Photo</label>
+                                        <label class="option-btn"><input type="radio" name="aadhaar-type" value="New Enrollment">New Enrollment</label>
+                                    </div>
+                                </div>
+                                <div class="dynamic-docs" id="aadhaar-docs" style="display:none;"></div>
+                            </div>
+                            
+                            <!-- PAN Content -->
+                            <div class="step2-content" id="pan-content">
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/></svg>
+                                        What service do you need?
+                                    </div>
+                                    <div class="option-grid" id="pan-type-grid">
+                                        <label class="option-btn"><input type="radio" name="pan-type" value="New PAN Card">New PAN Card</label>
+                                        <label class="option-btn"><input type="radio" name="pan-type" value="Name Correction">Name Correction</label>
+                                        <label class="option-btn"><input type="radio" name="pan-type" value="DOB Correction">DOB Correction</label>
+                                        <label class="option-btn"><input type="radio" name="pan-type" value="Address Correction">Address Correction</label>
+                                        <label class="option-btn"><input type="radio" name="pan-type" value="PAN Reprint">PAN Reprint</label>
+                                        <label class="option-btn"><input type="radio" name="pan-type" value="Link with Aadhaar">Link with Aadhaar</label>
+                                    </div>
+                                </div>
+                                <div class="dynamic-docs" id="pan-docs" style="display:none;"></div>
+                            </div>
+                            
+                            <!-- LAMINATION Content -->
+                            <div class="step2-content" id="lamination-content">
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                                        What size lamination?
+                                    </div>
+                                    <div class="option-grid">
+                                        <label class="option-btn"><input type="radio" name="lamination-type" value="ID Card Size">ID Card</label>
+                                        <label class="option-btn"><input type="radio" name="lamination-type" value="Aadhaar Card Size">Aadhaar Card</label>
+                                        <label class="option-btn"><input type="radio" name="lamination-type" value="A4 Size">A4 Size</label>
+                                        <label class="option-btn"><input type="radio" name="lamination-type" value="A3 Size">A3 Size</label>
+                                        <label class="option-btn"><input type="radio" name="lamination-type" value="Photo Size">Photo Size</label>
+                                    </div>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                        How many items?
+                                    </div>
+                                    <div class="number-field" style="max-width: 200px;">
+                                        <label>Quantity</label>
+                                        <input type="number" id="lamination-qty" value="1" min="1">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- EAPCET Content -->
+                            <div class="step2-content" id="eapcet-content">
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+                                        What help do you need?
+                                    </div>
+                                    <div class="option-grid" id="eapcet-service-grid">
+                                        <label class="option-btn"><input type="radio" name="eapcet-service" value="New Application">New Application</label>
+                                        <label class="option-btn"><input type="radio" name="eapcet-service" value="Application Correction">Correction</label>
+                                        <label class="option-btn"><input type="radio" name="eapcet-service" value="Slot Booking">Slot Booking</label>
+                                    </div>
+                                </div>
+                                <div class="dynamic-docs" id="eapcet-docs" style="display:none;"></div>
+                                <div class="detail-section" id="eapcet-state-section" style="display:none;">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                        Which state?
+                                    </div>
+                                    <div class="option-grid">
+                                        <label class="option-btn"><input type="radio" name="eapcet-state" value="AP EAPCET">AP EAPCET</label>
+                                        <label class="option-btn"><input type="radio" name="eapcet-state" value="TS EAPCET">TS EAPCET</label>
+                                        <label class="option-btn"><input type="radio" name="eapcet-state" value="Both AP & TS">Both AP & TS</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- OTHER Content -->
+                            <div class="step2-content" id="other-content">
+                                <div class="detail-section">
+                                    <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                                        Select the application
+                                    </div>
+                                    <div class="option-grid" id="other-type-grid">
+                                        <label class="option-btn"><input type="radio" name="other-type" value="Passport Application">Passport</label>
+                                        <label class="option-btn"><input type="radio" name="other-type" value="Driving License">Driving License</label>
+                                        <label class="option-btn"><input type="radio" name="other-type" value="Voter ID">Voter ID</label>
+                                        <label class="option-btn"><input type="radio" name="other-type" value="Income Certificate">Income Certificate</label>
+                                        <label class="option-btn"><input type="radio" name="other-type" value="Caste Certificate">Caste Certificate</label>
+                                        <label class="option-btn"><input type="radio" name="other-type" value="Other">Other</label>
+                                    </div>
+                                </div>
+                                <div class="dynamic-docs" id="other-docs" style="display:none;"></div>
+                                <div class="detail-section" id="other-specify-section" style="display: none;">
+                                    <div class="number-field">
+                                        <label>Please specify the application</label>
+                                        <input type="text" id="other-specify" placeholder="Enter application name...">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="nav-buttons">
+                                <button type="button" class="nav-btn btn-back" id="backToStep1">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                    Back
+                                </button>
+                                <button type="button" class="nav-btn btn-next" id="toStep3">
+                                    Continue
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- SLIDE 3: Your Details -->
+                        <div class="slide" data-slide="3">
+                            <h2 class="slide-title">Your Details</h2>
+                            <p class="slide-subtitle">We'll notify you when your order is ready</p>
+                            
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Full Name *</label>
+                                    <input type="text" id="customer-name" placeholder="Enter your name" required>
+                                </div>
+                                <div class="field-group">
+                                    <label>Mobile Number *</label>
+                                    <input type="tel" id="customer-phone" placeholder="Enter mobile number" required>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Preferred Pickup Time *</label>
+                                <input type="time" id="pickup-time" required style="max-width: 200px;">
+                            </div>
+                            
+                            <div class="nav-buttons">
+                                <button type="button" class="nav-btn btn-back" id="backToStep2">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                    Back
+                                </button>
+                                <button type="button" class="nav-btn btn-whatsapp" id="submitOrder">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                    Send via WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><h3>Sri Sai Student Xerox</h3><p>Main St, beside Airtel store, Prasadampadu, Ramavarappadu.</p></div>
+                <div class="footer-links-section"><h4>Quick Links</h4><div class="footer-links"><a href="index.html" class="footer-link">Home</a><a href="services.html" class="footer-link">Services</a><a href="order.html" class="footer-link">Order</a></div></div>
+                <div class="footer-links-section"><h4>Contact</h4><div class="footer-links"><a href="tel:+919000948781" class="footer-link">+91 9000948781</a><a href="https://wa.me/919000948781" class="footer-link">WhatsApp</a></div></div>
+            </div>
+            <div class="footer-bottom"><p class="footer-copyright">© 2026 Sri Sai Student Xerox. All rights reserved. | Built by <a href="https://uxitech.in" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 500;">UXITECH</a></p></div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/three-bg.js"></script>
+    <script>
+        (function() {
+            let currentStep = 1;
+            let selectedService = null;
+            
+            const slides = document.querySelectorAll('.slide');
+            const stepDots = document.querySelectorAll('.step-dot');
+            const stepLines = document.querySelectorAll('.step-line');
+            const serviceCards = document.querySelectorAll('.service-card');
+            const step2Contents = document.querySelectorAll('.step2-content');
+            
+            const toStep2Btn = document.getElementById('toStep2');
+            const toStep3Btn = document.getElementById('toStep3');
+            const backToStep1Btn = document.getElementById('backToStep1');
+            const backToStep2Btn = document.getElementById('backToStep2');
+            const submitBtn = document.getElementById('submitOrder');
+            
+            // Dynamic required documents per sub-service
+            const aadhaarDocs = {
+                'Mobile Number Update': ['Original Aadhaar Card', 'New Mobile Number to update', 'OTP on currently registered mobile'],
+                'Address Update': ['Original Aadhaar Card', 'Address Proof (Electricity bill / Rent agreement / Gas bill)', 'OTP on registered mobile'],
+                'Name Correction': ['Original Aadhaar Card', 'Name Proof (10th Certificate / Passport / Marriage Certificate)', 'OTP on registered mobile'],
+                'DOB Correction': ['Original Aadhaar Card', 'DOB Proof (Birth Certificate / 10th Certificate)', 'OTP on registered mobile'],
+                'Photo Update': ['Original Aadhaar Card', 'OTP on registered mobile', 'Visit required for biometric capture'],
+                'New Enrollment': ['Identity Proof (Voter ID / Passport / Driving License)', 'Address Proof (Electricity bill / Ration card)', 'DOB Proof (Birth Certificate / 10th Certificate)', 'Active Mobile Number']
+            };
+            
+            const panDocs = {
+                'New PAN Card': ['Aadhaar Card', 'Passport size photo', 'Signature on white paper'],
+                'Name Correction': ['Aadhaar Card', 'Passport size photo', 'Signature on white paper', 'Gazette Notification / Marriage Certificate'],
+                'DOB Correction': ['Aadhaar Card', 'Passport size photo', 'Signature on white paper', 'Birth Certificate / 10th Marks Memo'],
+                'Address Correction': ['Aadhaar Card', 'Passport size photo', 'Signature on white paper', 'Address Proof document'],
+                'PAN Reprint': ['Aadhaar Card', 'Old PAN Card copy', 'Passport size photo', 'Signature on white paper'],
+                'Link with Aadhaar': ['PAN Card Number', 'Aadhaar Card Number', 'Mobile number linked with Aadhaar (for OTP)']
+            };
+            
+            const eapcetDocs = {
+                'New Application': ['10th Class Marks Memo', 'Inter / 12th Marks Memo', 'Aadhaar Card', 'Passport size photo', 'Caste / Income Certificate (if applicable)', 'Study Certificate'],
+                'Application Correction': ['EAPCET Application Number / Print', 'Correct documents for the fields to update', 'Aadhaar Card'],
+                'Slot Booking': ['EAPCET Hall Ticket', 'EAPCET Rank Card', 'Aadhaar Card', 'Certificates for verification']
+            };
+            
+            const otherDocs = {
+                'Passport Application': ['Aadhaar Card', 'PAN Card', 'Passport size photo', 'Address Proof', 'Birth Certificate / 10th Marks Memo'],
+                'Driving License': ['Aadhaar Card', 'Passport size photo', 'Address Proof', 'Age Proof', 'Learner License (for permanent DL)'],
+                'Voter ID': ['Aadhaar Card', 'Passport size photo', 'Address Proof', 'Age Proof (Birth Certificate / 10th Certificate)'],
+                'Income Certificate': ['Aadhaar Card', 'Ration Card', 'Salary Certificate / Income Proof', 'White Ration Card (if applicable)'],
+                'Caste Certificate': ['Aadhaar Card', 'Ration Card', "Father's Caste Certificate", '10th Certificate', 'Passport size photo']
+            };
+            
+            function showDynamicDocs(containerId, docs) {
+                const container = document.getElementById(containerId);
+                if (!docs || docs.length === 0) {
+                    container.style.display = 'none';
+                    return;
+                }
+                let html = '<div class="info-box"><h4>📄 Required Documents</h4><ul>';
+                docs.forEach(doc => { html += '<li>' + doc + '</li>'; });
+                html += '</ul></div>';
+                container.innerHTML = html;
+                container.style.display = 'block';
+                container.style.animation = 'fadeIn 0.3s ease';
+            }
+            
+            // Go to specific step
+            function goToStep(step) {
+                currentStep = step;
+                
+                // Update slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                document.querySelector(`[data-slide="${step}"]`).classList.add('active');
+                
+                // Update step indicator
+                stepDots.forEach((dot, index) => {
+                    dot.classList.remove('active', 'completed');
+                    if (index + 1 < step) dot.classList.add('completed');
+                    if (index + 1 === step) dot.classList.add('active');
+                });
+                
+                stepLines.forEach((line, index) => {
+                    line.classList.remove('completed');
+                    if (index + 1 < step) line.classList.add('completed');
+                });
+                
+                // Scroll to top of form
+                document.querySelector('.order-form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            // Service card selection
+            serviceCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    serviceCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedService = this.dataset.service;
+                    toStep2Btn.disabled = false;
+                    
+                    // Prepare Step 2 content
+                    step2Contents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(selectedService + '-content').classList.add('active');
+                    
+                    // Update Step 2 title based on service
+                    const titles = {
+                        'xerox': 'Print Details',
+                        'aadhaar': 'Aadhaar Update Details',
+                        'pan': 'PAN Card Details',
+                        'lamination': 'Lamination Details',
+                        'eapcet': 'EAPCET Application',
+                        'other': 'Application Details'
+                    };
+                    document.getElementById('step2Title').textContent = titles[selectedService];
+                });
+            });
+            
+            // Option button selection with dynamic docs
+            document.querySelectorAll('.option-grid').forEach(grid => {
+                grid.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const radioName = this.querySelector('input').name;
+                        document.querySelectorAll(`input[name="${radioName}"]`).forEach(input => {
+                            input.closest('.option-btn').classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                        
+                        const val = this.querySelector('input').value;
+                        
+                        // Show dynamic required documents based on sub-service selected
+                        if (radioName === 'aadhaar-type') {
+                            showDynamicDocs('aadhaar-docs', aadhaarDocs[val]);
+                        } else if (radioName === 'pan-type') {
+                            showDynamicDocs('pan-docs', panDocs[val]);
+                        } else if (radioName === 'eapcet-service') {
+                            showDynamicDocs('eapcet-docs', eapcetDocs[val]);
+                            document.getElementById('eapcet-state-section').style.display = 'block';
+                        } else if (radioName === 'other-type') {
+                            if (val === 'Other') {
+                                document.getElementById('other-docs').style.display = 'none';
+                                document.getElementById('other-specify-section').style.display = 'block';
+                            } else {
+                                document.getElementById('other-specify-section').style.display = 'none';
+                                showDynamicDocs('other-docs', otherDocs[val]);
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Navigation
+            toStep2Btn.addEventListener('click', () => goToStep(2));
+            toStep3Btn.addEventListener('click', () => goToStep(3));
+            backToStep1Btn.addEventListener('click', () => goToStep(1));
+            backToStep2Btn.addEventListener('click', () => goToStep(2));
+            
+            // Submit Order
+            submitBtn.addEventListener('click', function() {
+                const name = document.getElementById('customer-name').value.trim();
+                const phone = document.getElementById('customer-phone').value.trim();
+                const pickupTime = document.getElementById('pickup-time').value;
+                
+                if (!name) { alert('Please enter your name'); return; }
+                if (!phone) { alert('Please enter your mobile number'); return; }
+                if (!pickupTime) { alert('Please select pickup time'); return; }
+                
+                const time = new Date('1970-01-01T' + pickupTime);
+                const formattedTime = time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                
+                const serviceNames = {
+                    'xerox': 'Xerox / Print',
+                    'aadhaar': 'Aadhaar Card Update',
+                    'pan': 'PAN Card Service',
+                    'lamination': 'Lamination',
+                    'eapcet': 'EAPCET Application',
+                    'other': 'Other Application'
+                };
+                
+                const today = new Date();
+                const dateStr = today.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+                
+                let msg = '';
+                msg += `🏪 *SRI SAI STUDENT XEROX*%0A`;
+                msg += `📍 Main St, beside Airtel store, Prasadampadu%0A`;
+                msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+                
+                msg += `📋 *NEW ORDER REQUEST*%0A`;
+                msg += `📅 Date: ${dateStr}%0A%0A`;
+                
+                msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━%0A`;
+                msg += `🔖 *SERVICE DETAILS*%0A`;
+                msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+                
+                msg += `📌 *Service:* ${serviceNames[selectedService]}%0A%0A`;
+                
+                if (selectedService === 'xerox') {
+                    const printType = document.querySelector('input[name="print-type"]:checked');
+                    const pages = document.getElementById('xerox-pages').value;
+                    const copies = document.getElementById('xerox-copies').value;
+                    const binding = document.querySelector('input[name="binding"]:checked');
+                    
+                    if (!printType) { alert('Please select Black & White or Colour'); return; }
+                    
+                    msg += `🖨️ *Print Type:* ${printType.value}%0A`;
+                    msg += `📄 *No. of Pages:* ${pages}%0A`;
+                    msg += `📑 *No. of Copies:* ${copies}%0A`;
+                    if (binding && binding.value !== 'No Binding') {
+                        msg += `📖 *Binding:* ${binding.value}%0A`;
+                    } else {
+                        msg += `📖 *Binding:* Not Required%0A`;
+                    }
+                    
+                } else if (selectedService === 'aadhaar') {
+                    const updateType = document.querySelector('input[name="aadhaar-type"]:checked');
+                    if (!updateType) { alert('Please select update type'); return; }
+                    msg += `🪪 *Update Type:* ${updateType.value}%0A`;
+                    
+                    const docsContainer = document.getElementById('aadhaar-docs');
+                    if (docsContainer && docsContainer.style.display !== 'none') {
+                        const docItems = docsContainer.querySelectorAll('.info-box li');
+                        if (docItems.length > 0) {
+                            msg += `%0A📎 *Required Documents:*%0A`;
+                            docItems.forEach(item => {
+                                msg += `   • ${item.textContent.trim()}%0A`;
+                            });
+                        }
+                    }
+                    
+                } else if (selectedService === 'pan') {
+                    const panType = document.querySelector('input[name="pan-type"]:checked');
+                    if (!panType) { alert('Please select PAN service type'); return; }
+                    msg += `💳 *Service Type:* ${panType.value}%0A`;
+                    
+                    const docsContainer = document.getElementById('pan-docs');
+                    if (docsContainer && docsContainer.style.display !== 'none') {
+                        const docItems = docsContainer.querySelectorAll('.info-box li');
+                        if (docItems.length > 0) {
+                            msg += `%0A📎 *Required Documents:*%0A`;
+                            docItems.forEach(item => {
+                                msg += `   • ${item.textContent.trim()}%0A`;
+                            });
+                        }
+                    }
+                    
+                } else if (selectedService === 'lamination') {
+                    const lamType = document.querySelector('input[name="lamination-type"]:checked');
+                    const qty = document.getElementById('lamination-qty').value;
+                    if (!lamType) { alert('Please select lamination size'); return; }
+                    msg += `✨ *Lamination Size:* ${lamType.value}%0A`;
+                    msg += `🔢 *Quantity:* ${qty}%0A`;
+                    
+                } else if (selectedService === 'eapcet') {
+                    const service = document.querySelector('input[name="eapcet-service"]:checked');
+                    const state = document.querySelector('input[name="eapcet-state"]:checked');
+                    if (!service) { alert('Please select service type'); return; }
+                    if (!state) { alert('Please select state'); return; }
+                    msg += `📝 *Application Type:* ${service.value}%0A`;
+                    msg += `🏛️ *State:* ${state.value}%0A`;
+                    
+                    const docsContainer = document.getElementById('eapcet-docs');
+                    if (docsContainer && docsContainer.style.display !== 'none') {
+                        const docItems = docsContainer.querySelectorAll('.info-box li');
+                        if (docItems.length > 0) {
+                            msg += `%0A📎 *Required Documents:*%0A`;
+                            docItems.forEach(item => {
+                                msg += `   • ${item.textContent.trim()}%0A`;
+                            });
+                        }
+                    }
+                    
+                } else if (selectedService === 'other') {
+                    const otherType = document.querySelector('input[name="other-type"]:checked');
+                    if (!otherType) { alert('Please select application type'); return; }
+                    let serviceName = otherType.value;
+                    if (serviceName === 'Other') {
+                        const specified = document.getElementById('other-specify').value.trim();
+                        if (!specified) { alert('Please specify the application'); return; }
+                        serviceName = specified;
+                    }
+                    msg += `📄 *Application:* ${serviceName}%0A`;
+                    
+                    const docsContainer = document.getElementById('other-docs');
+                    if (docsContainer && docsContainer.style.display !== 'none') {
+                        const docItems = docsContainer.querySelectorAll('.info-box li');
+                        if (docItems.length > 0) {
+                            msg += `%0A📎 *Required Documents:*%0A`;
+                            docItems.forEach(item => {
+                                msg += `   • ${item.textContent.trim()}%0A`;
+                            });
+                        }
+                    }
+                }
+                
+                msg += `%0A━━━━━━━━━━━━━━━━━━━━━━━━━━%0A`;
+                msg += `👤 *CUSTOMER INFORMATION*%0A`;
+                msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+                msg += `🧑 *Name:* ${name}%0A`;
+                msg += `📱 *Mobile:* ${phone}%0A`;
+                msg += `🕐 *Preferred Pickup:* ${formattedTime}%0A`;
+                
+                msg += `%0A━━━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+                
+                if (selectedService === 'xerox') {
+                    msg += `📎 _I will attach the document files (PDF/Images) in this chat. Please wait._`;
+                } else {
+                    msg += `🙏 _Kindly confirm the order and share the total charges. Thank you!_`;
+                }
+                
+                msg += `%0A%0A— _Sent via srisaixerox.in_`;
+                
+                if (selectedService === 'xerox') {
+                    // Show attachment reminder modal for xerox
+                    const modal = document.getElementById('attachModal');
+                    modal.classList.add('active');
+                    
+                    const openBtn = document.getElementById('openWhatsappBtn');
+                    // Remove old listener by cloning
+                    const newBtn = openBtn.cloneNode(true);
+                    openBtn.parentNode.replaceChild(newBtn, openBtn);
+                    
+                    newBtn.addEventListener('click', function() {
+                        modal.classList.remove('active');
+                        window.open(`https://wa.me/919000948781?text=${msg}`, '_blank');
+                    });
+                    
+                    // Close modal on overlay click
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === modal) {
+                            modal.classList.remove('active');
+                        }
+                    });
+                } else {
+                    window.open(`https://wa.me/919000948781?text=${msg}`, '_blank');
+                }
+            });
+        })();
+    </script>
+    
+    <!-- Attachment Reminder Modal -->
+    <div class="modal-overlay" id="attachModal">
+        <div class="modal-box">
+            <div class="modal-icon">📎</div>
+            <h3>Attach Your Documents</h3>
+            <p>Your order details will be sent to WhatsApp. Please <strong>attach your files</strong> (documents to print) in the WhatsApp chat after sending the message.</p>
+            <div class="modal-file-types">
+                <span class="file-type-badge">📄 PDF</span>
+                <span class="file-type-badge">🖼️ Images</span>
+                <span class="file-type-badge">📝 Word / Docs</span>
+            </div>
+            <button class="modal-btn modal-btn-primary" id="openWhatsappBtn">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.79 23.492l4.6-1.477A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-2.169 0-4.18-.586-5.92-1.608l-.424-.252-2.732.878.87-2.647-.276-.44A9.794 9.794 0 012.18 12c0-5.422 4.398-9.82 9.82-9.82 5.422 0 9.82 4.398 9.82 9.82 0 5.422-4.398 9.82-9.82 9.82z"/></svg>
+                Open WhatsApp & Attach Files
+            </button>
+            <p class="modal-note">📌 Use the attachment (📎) icon in WhatsApp to send your files</p>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Nav -->
+    <nav class="mobile-nav">
+        <a href="index.html"><svg class="mob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="mob-label">Home</span></a>
+        <a href="services.html"><svg class="mob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span class="mob-label">Services</span></a>
+        <a href="order.html" class="active"><svg class="mob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span class="mob-label">Order</span></a>
+        <a href="online-applications.html"><svg class="mob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="mob-label">Apply</span></a>
+        <a href="about.html"><svg class="mob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span class="mob-label">About</span></a>
+        <a href="contact.html"><svg class="mob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="mob-label">Contact</span></a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <path id="topArc" d="M 200,200 m -155,0 a 155,155 0 1,1 310,0 a 155,155 0 1,1 -310,0"/>
+    <path id="bottomArc" d="M 200,200 m -125,0 a 125,125 0 1,0 250,0 a 125,125 0 1,0 -250,0"/>
+  </defs>
+  
+  <!-- SRI SAI XEROX - curved top, extra bold -->
+  <text fill="#1a3a5c" font-family="'Arial Black', 'Impact', sans-serif" font-size="44" font-weight="900" letter-spacing="8">
+    <textPath href="#topArc" startOffset="25%" text-anchor="middle">SRI SAI XEROX</textPath>
+  </text>
+  
+  <!-- Design. Print. Deliver. - curved bottom -->
+  <text fill="#1a3a5c" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-style="italic" letter-spacing="3">
+    <textPath href="#bottomArc" startOffset="25%" text-anchor="middle">Design.  Print.  Deliver.</textPath>
+  </text>
+  
+  <!-- Printer Icon - bigger, bolder -->
+  <g stroke="#1a3a5c" fill="none" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Paper feed slot (top) -->
+    <path d="M 168,148 L 168,120 Q 168,112 176,112 L 224,112 Q 232,112 232,120 L 232,148"/>
+    
+    <!-- Main printer body -->
+    <rect x="140" y="148" width="120" height="58" rx="6"/>
+    
+    <!-- Output paper tray -->
+    <rect x="158" y="200" width="84" height="44" rx="4"/>
+    
+    <!-- Lines on printed paper -->
+    <line x1="173" y1="215" x2="227" y2="215" stroke-width="4"/>
+    <line x1="173" y1="226" x2="227" y2="226" stroke-width="4"/>
+    <line x1="173" y1="237" x2="210" y2="237" stroke-width="4"/>
+    
+    <!-- Indicator dots -->
+    <circle cx="234" cy="174" r="5.5" fill="#1a3a5c" stroke="none"/>
+    <circle cx="248" cy="174" r="5.5" fill="#1a3a5c" stroke="none"/>
+  </g>
+</svg>
