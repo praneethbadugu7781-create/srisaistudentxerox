@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://srisaixerox.in/sitemap.xml
+Sitemap: https://srisaistudentxerox.in/sitemap.xml
