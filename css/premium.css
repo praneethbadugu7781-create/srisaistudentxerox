@@ -165,7 +165,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 120px 24px 80px;
+    padding: 160px 24px 80px;
     position: relative;
 }
 
@@ -859,7 +859,7 @@ body {
     }
     
     .hero {
-        padding: 100px 24px 60px;
+        padding: 140px 24px 60px;
     }
     
     .hero-brand {
@@ -985,7 +985,7 @@ body {
 
 /* Page Header */
 .page-header {
-    padding: 140px 0 60px;
+    padding: 170px 0 60px;
     text-align: center;
     background: var(--bg-secondary);
     position: relative;
@@ -1024,7 +1024,7 @@ body {
 
 /* Contact Hero */
 .contact-hero {
-    padding: 140px 0 40px;
+    padding: 170px 0 40px;
     text-align: center;
 }
 
