@@ -1029,18 +1029,18 @@
                 const dateStr = today.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
                 
                 let msg = '';
-                msg += `🏪 *SRI SAI STUDENT XEROX*%0A`;
-                msg += `📍 Main St, beside Airtel store, Prasadampadu%0A`;
-                msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+                msg += `*SRI SAI STUDENT XEROX*%0A`;
+                msg += `Main St, beside Airtel store, Prasadampadu%0A`;
+                msg += `----------------------------%0A%0A`;
                 
-                msg += `📋 *NEW ORDER REQUEST*%0A`;
-                msg += `📅 Date: ${dateStr}%0A%0A`;
+                msg += `*NEW ORDER REQUEST*%0A`;
+                msg += `Date: ${dateStr}%0A%0A`;
                 
-                msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━%0A`;
-                msg += `🔖 *SERVICE DETAILS*%0A`;
-                msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+                msg += `----------------------------%0A`;
+                msg += `*SERVICE DETAILS*%0A`;
+                msg += `----------------------------%0A%0A`;
                 
-                msg += `📌 *Service:* ${serviceNames[selectedService]}%0A%0A`;
+                msg += `Service: ${serviceNames[selectedService]}%0A%0A`;
                 
                 if (selectedService === 'xerox') {
                     const printType = document.querySelector('input[name="print-type"]:checked');
@@ -1052,28 +1052,28 @@
                     if (!printType) { alert('Please select Black & White or Colour'); return; }
                     if (!printSide) { alert('Please select Single Side or Both Side'); return; }
                     
-                    msg += `🖨️ *Print Type:* ${printType.value}%0A`;
-                    msg += `📃 *Printing:* ${printSide.value}%0A`;
-                    msg += `📄 *No. of Pages:* ${pages}%0A`;
-                    msg += `📑 *No. of Copies:* ${copies}%0A`;
+                    msg += `Print Type: ${printType.value}%0A`;
+                    msg += `Printing: ${printSide.value}%0A`;
+                    msg += `No. of Pages: ${pages}%0A`;
+                    msg += `No. of Copies: ${copies}%0A`;
                     if (binding && binding.value !== 'No Binding') {
-                        msg += `📖 *Binding:* ${binding.value}%0A`;
+                        msg += `Binding: ${binding.value}%0A`;
                     } else {
-                        msg += `📖 *Binding:* Not Required%0A`;
+                        msg += `Binding: Not Required%0A`;
                     }
                     
                 } else if (selectedService === 'aadhaar') {
                     const updateType = document.querySelector('input[name="aadhaar-type"]:checked');
                     if (!updateType) { alert('Please select update type'); return; }
-                    msg += `🪪 *Update Type:* ${updateType.value}%0A`;
+                    msg += `Update Type: ${updateType.value}%0A`;
                     
                     const docsContainer = document.getElementById('aadhaar-docs');
                     if (docsContainer && docsContainer.style.display !== 'none') {
                         const docItems = docsContainer.querySelectorAll('.info-box li');
                         if (docItems.length > 0) {
-                            msg += `%0A📎 *Required Documents:*%0A`;
+                            msg += `%0ARequired Documents:%0A`;
                             docItems.forEach(item => {
-                                msg += `   • ${item.textContent.trim()}%0A`;
+                                msg += `- ${item.textContent.trim()}%0A`;
                             });
                         }
                     }
@@ -1081,15 +1081,15 @@
                 } else if (selectedService === 'pan') {
                     const panType = document.querySelector('input[name="pan-type"]:checked');
                     if (!panType) { alert('Please select PAN service type'); return; }
-                    msg += `💳 *Service Type:* ${panType.value}%0A`;
+                    msg += `Service Type: ${panType.value}%0A`;
                     
                     const docsContainer = document.getElementById('pan-docs');
                     if (docsContainer && docsContainer.style.display !== 'none') {
                         const docItems = docsContainer.querySelectorAll('.info-box li');
                         if (docItems.length > 0) {
-                            msg += `%0A📎 *Required Documents:*%0A`;
+                            msg += `%0ARequired Documents:%0A`;
                             docItems.forEach(item => {
-                                msg += `   • ${item.textContent.trim()}%0A`;
+                                msg += `- ${item.textContent.trim()}%0A`;
                             });
                         }
                     }
@@ -1098,24 +1098,24 @@
                     const lamType = document.querySelector('input[name="lamination-type"]:checked');
                     const qty = document.getElementById('lamination-qty').value;
                     if (!lamType) { alert('Please select lamination size'); return; }
-                    msg += `✨ *Lamination Size:* ${lamType.value}%0A`;
-                    msg += `🔢 *Quantity:* ${qty}%0A`;
+                    msg += `Lamination Size: ${lamType.value}%0A`;
+                    msg += `Quantity: ${qty}%0A`;
                     
                 } else if (selectedService === 'eapcet') {
                     const service = document.querySelector('input[name="eapcet-service"]:checked');
                     const state = document.querySelector('input[name="eapcet-state"]:checked');
                     if (!service) { alert('Please select service type'); return; }
                     if (!state) { alert('Please select state'); return; }
-                    msg += `📝 *Application Type:* ${service.value}%0A`;
-                    msg += `🏛️ *State:* ${state.value}%0A`;
+                    msg += `Application Type: ${service.value}%0A`;
+                    msg += `State: ${state.value}%0A`;
                     
                     const docsContainer = document.getElementById('eapcet-docs');
                     if (docsContainer && docsContainer.style.display !== 'none') {
                         const docItems = docsContainer.querySelectorAll('.info-box li');
                         if (docItems.length > 0) {
-                            msg += `%0A📎 *Required Documents:*%0A`;
+                            msg += `%0ARequired Documents:%0A`;
                             docItems.forEach(item => {
-                                msg += `   • ${item.textContent.trim()}%0A`;
+                                msg += `- ${item.textContent.trim()}%0A`;
                             });
                         }
                     }
@@ -1129,36 +1129,36 @@
                         if (!specified) { alert('Please specify the application'); return; }
                         serviceName = specified;
                     }
-                    msg += `📄 *Application:* ${serviceName}%0A`;
+                    msg += `Application: ${serviceName}%0A`;
                     
                     const docsContainer = document.getElementById('other-docs');
                     if (docsContainer && docsContainer.style.display !== 'none') {
                         const docItems = docsContainer.querySelectorAll('.info-box li');
                         if (docItems.length > 0) {
-                            msg += `%0A📎 *Required Documents:*%0A`;
+                            msg += `%0ARequired Documents:%0A`;
                             docItems.forEach(item => {
-                                msg += `   • ${item.textContent.trim()}%0A`;
+                                msg += `- ${item.textContent.trim()}%0A`;
                             });
                         }
                     }
                 }
                 
-                msg += `%0A━━━━━━━━━━━━━━━━━━━━━━━━━━%0A`;
-                msg += `👤 *CUSTOMER INFORMATION*%0A`;
-                msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
-                msg += `🧑 *Name:* ${name}%0A`;
-                msg += `📱 *Mobile:* ${phone}%0A`;
-                msg += `🕐 *Preferred Pickup:* ${formattedTime}%0A`;
+                msg += `%0A----------------------------%0A`;
+                msg += `*CUSTOMER INFORMATION*%0A`;
+                msg += `----------------------------%0A%0A`;
+                msg += `Name: ${name}%0A`;
+                msg += `Mobile: ${phone}%0A`;
+                msg += `Preferred Pickup: ${formattedTime}%0A`;
                 
-                msg += `%0A━━━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+                msg += `%0A----------------------------%0A%0A`;
                 
                 if (selectedService === 'xerox') {
-                    msg += `📎 _I will attach the document files (PDF/Images) in this chat. Please wait._`;
+                    msg += `I will attach the document files (PDF/Images) in this chat. Please wait.`;
                 } else {
-                    msg += `🙏 _Kindly confirm the order and share the total charges. Thank you!_`;
+                    msg += `Kindly confirm the order and share the total charges. Thank you.`;
                 }
                 
-                msg += `%0A%0A— _Sent via srisaistudentxerox.in_`;
+                msg += `%0A%0ASent via srisaistudentxerox.in`;
                 
                 if (selectedService === 'xerox') {
                     // Show attachment reminder modal for xerox
