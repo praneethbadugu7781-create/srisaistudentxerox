@@ -836,7 +836,7 @@ body {
 @media (max-width: 768px) {
     /* Top bar: only logo */
     .navbar {
-        padding: 10px 0;
+        padding: 6px 0;
     }
     
     .nav-container {
@@ -848,9 +848,9 @@ body {
     }
     
     .logo-icon {
-        height: 90px;
+        height: 70px;
         width: auto;
-        max-width: 160px;
+        max-width: 140px;
     }
     
     /* Fixed Bottom Tab Bar */
@@ -859,7 +859,7 @@ body {
     }
     
     .hero {
-        padding: 140px 24px 60px;
+        padding: 120px 20px 50px;
     }
     
     .hero-brand {
@@ -880,6 +880,39 @@ body {
         width: 100%;
     }
     
+    .container {
+        padding: 0 16px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .section-header {
+        margin-bottom: 36px;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-label {
+        font-size: 0.7rem;
+        padding: 5px 12px;
+    }
+    
+    .page-header {
+        padding: 130px 0 40px;
+    }
+    
+    .page-title {
+        font-size: 1.75rem;
+    }
+    
+    .page-subtitle {
+        font-size: 0.95rem;
+    }
+    
     .service-showcase {
         display: flex;
         overflow-x: auto;
@@ -895,9 +928,22 @@ body {
     }
     
     .service-showcase .showcase-card {
-        min-width: 260px;
+        min-width: 240px;
         flex-shrink: 0;
         scroll-snap-align: start;
+    }
+    
+    .showcase-card h3 {
+        font-size: 1.05rem;
+    }
+    
+    .showcase-card p {
+        font-size: 0.85rem;
+    }
+    
+    .showcase-img {
+        height: 100px;
+    }
     }
     
     /* Timeline mobile - vertical layout */
@@ -956,26 +1002,188 @@ body {
     .timeline-card {
         flex: 1;
         text-align: left;
-        padding: 20px;
+        padding: 16px;
     }
     
     .timeline-icon {
-        margin: 0 0 10px 0;
+        margin: 0 0 8px 0;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .timeline-title {
+        font-size: 0.95rem;
+    }
+    
+    .timeline-desc {
+        font-size: 0.8rem;
     }
     
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 24px;
+    }
+    
+    .footer {
+        padding: 40px 0 24px;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.15rem;
+    }
+    
+    .footer-brand p {
+        font-size: 0.85rem;
+    }
+    
+    .footer-link {
+        font-size: 0.85rem;
+    }
+    
+    /* Service cards compat */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    
+    .service-card {
+        padding: 22px;
+    }
+    
+    /* App cards */
+    .app-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .app-card {
+        padding: 24px;
+    }
+    
+    .app-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .app-card p {
+        font-size: 0.875rem;
+    }
+    
+    /* CTA */
+    .cta-section {
+        padding: 60px 20px;
+    }
+    
+    .cta-title {
+        font-size: 1.5rem;
+    }
+    
+    .cta-desc {
+        font-size: 0.95rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9375rem;
+    }
+    
+    .btn-lg {
+        padding: 14px 28px;
+        font-size: 0.95rem;
     }
 }
 
 @media (max-width: 480px) {
     .timeline-item {
-        margin-bottom: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .hero-tagline {
+        font-size: 1.75rem;
+    }
+    
+    .hero-desc {
+        font-size: 0.95rem;
+    }
+    
+    .hero-badge span {
+        font-size: 0.75rem;
+    }
+    
+    .brand-name {
+        font-size: 1.4rem;
+    }
+    
+    .brand-location {
+        font-size: 0.875rem;
+    }
+    
+    .brand-icon {
+        width: 52px;
+        height: 52px;
+    }
+    
+    .contact-cards-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .contact-quick-card {
+        padding: 16px 12px;
+    }
+    
+    .cqc-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .cqc-value {
+        font-size: 0.8rem;
+    }
+    
+    .contact-hero-title {
+        font-size: 2rem;
+    }
+    
+    .contact-hero-sub {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo-icon {
+        height: 56px;
+        max-width: 120px;
+    }
+    
+    .container {
+        padding: 0 12px;
+    }
+    
+    .contact-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .hero {
+        padding: 100px 16px 40px;
+    }
+    
+    .page-header {
+        padding: 110px 0 30px;
     }
     
     .section {
-        padding: 60px 0;
+        padding: 40px 0;
     }
 }
 
@@ -1067,8 +1275,8 @@ body {
 
 .contact-cards-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
 }
 
 .contact-quick-card {
@@ -1144,6 +1352,11 @@ body {
 .cqc-location {
     background: linear-gradient(135deg, #ede9fe, #ddd6fe);
     color: #7c3aed;
+}
+
+.cqc-email {
+    background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+    color: #db2777;
 }
 
 .cqc-title {
@@ -1326,27 +1539,37 @@ body {
         gap: 12px;
     }
     
+    /* Make last card in 5-card grid span full width */
+    .contact-cards-grid .contact-quick-card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
+    
     .contact-quick-card {
-        padding: 20px 16px;
+        padding: 20px 14px;
     }
     
     .cqc-icon {
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
         border-radius: 12px;
     }
     
     .cqc-icon svg {
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
     }
     
     .cqc-value {
-        font-size: 0.9375rem;
+        font-size: 0.85rem;
+        word-break: break-all;
     }
     
     .cqc-action {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+    }
+    
+    .cqc-title {
+        font-size: 0.7rem;
     }
     
     .contact-map-grid {

@@ -394,13 +394,26 @@
         }
         
         @media (max-width: 640px) {
-            .service-grid { grid-template-columns: repeat(2, 1fr); }
+            .service-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .service-card { padding: 20px 12px; }
+            .service-icon { width: 44px; height: 44px; font-size: 1.5rem; margin-bottom: 10px; }
+            .service-name { font-size: 0.875rem; }
             .field-row { grid-template-columns: 1fr; }
             .number-input-row { flex-direction: column; }
-            .order-form-card { padding: 28px 20px; }
-            .step-line { width: 50px; }
+            .order-form-card { padding: 24px 16px; border-radius: 18px; }
+            .step-line { width: 40px; }
+            .step-dot { width: 38px; height: 38px; font-size: 0.875rem; }
             .nav-buttons { flex-direction: column-reverse; }
             .btn-back { width: 100%; }
+            .slide-title { font-size: 1.25rem; }
+            .slide-subtitle { font-size: 0.875rem; margin-bottom: 24px; }
+            .detail-label { font-size: 0.95rem; }
+            .option-btn { padding: 11px 16px; font-size: 0.85rem; }
+            .nav-btn { padding: 14px 20px; font-size: 0.95rem; }
+            .number-field input { padding: 12px 14px; }
+            .field-group input { padding: 12px 14px; }
+            .info-box { padding: 16px; }
+            .info-box ul { font-size: 0.85rem; }
         }
             /* Attachment Reminder Modal */
         .modal-overlay {
@@ -621,6 +634,16 @@
                                 </div>
                                 <div class="detail-section">
                                     <div class="detail-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="3" width="12" height="18" rx="2"/></svg>
+                                        Single Side or Both Side?
+                                    </div>
+                                    <div class="option-grid">
+                                        <label class="option-btn"><input type="radio" name="print-side" value="Single Side">Single Side</label>
+                                        <label class="option-btn"><input type="radio" name="print-side" value="Both Side">Both Side</label>
+                                    </div>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                                         Pages & Copies
                                     </div>
@@ -820,7 +843,7 @@
             <div class="footer-grid">
                 <div class="footer-brand"><h3>Sri Sai Student Xerox</h3><p>Main St, beside Airtel store, Prasadampadu, Ramavarappadu.</p></div>
                 <div class="footer-links-section"><h4>Quick Links</h4><div class="footer-links"><a href="index.html" class="footer-link">Home</a><a href="services.html" class="footer-link">Services</a><a href="order.html" class="footer-link">Order</a></div></div>
-                <div class="footer-links-section"><h4>Contact</h4><div class="footer-links"><a href="tel:+919000948781" class="footer-link">+91 9000948781</a><a href="https://wa.me/919000948781" class="footer-link">WhatsApp</a></div></div>
+                <div class="footer-links-section"><h4>Contact</h4><div class="footer-links"><a href="tel:+919000948781" class="footer-link">+91 9000948781</a><a href="https://wa.me/919000948781" class="footer-link">WhatsApp</a><a href="mailto:sssprintouts@gmail.com" class="footer-link">sssprintouts@gmail.com</a></div></div>
             </div>
             <div class="footer-bottom"><p class="footer-copyright">© 2026 Sri Sai Student Xerox. All rights reserved. | Built by <a href="https://uxitech.in" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 500;">UXITECH</a></p></div>
         </div>
@@ -1025,9 +1048,12 @@
                     const copies = document.getElementById('xerox-copies').value;
                     const binding = document.querySelector('input[name="binding"]:checked');
                     
+                    const printSide = document.querySelector('input[name="print-side"]:checked');
                     if (!printType) { alert('Please select Black & White or Colour'); return; }
+                    if (!printSide) { alert('Please select Single Side or Both Side'); return; }
                     
                     msg += `🖨️ *Print Type:* ${printType.value}%0A`;
+                    msg += `📃 *Printing:* ${printSide.value}%0A`;
                     msg += `📄 *No. of Pages:* ${pages}%0A`;
                     msg += `📑 *No. of Copies:* ${copies}%0A`;
                     if (binding && binding.value !== 'No Binding') {
