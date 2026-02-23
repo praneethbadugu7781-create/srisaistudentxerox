@@ -121,6 +121,11 @@ body {
     list-style: none;
 }
 
+/* Call button - hidden on desktop, shown on mobile */
+.nav-call-btn {
+    display: none;
+}
+
 .nav-link {
     display: block;
     padding: 8px 16px;
@@ -840,11 +845,37 @@ body {
     }
     
     .nav-container {
-        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
     }
     
     .nav-menu {
         display: none;
+    }
+    
+    .nav-call-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #10b981, #0ea5e9);
+        color: #fff;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        transition: transform 0.2s, box-shadow 0.2s;
+        flex-shrink: 0;
+    }
+    
+    .nav-call-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    }
+    
+    .nav-call-btn svg {
+        width: 22px;
+        height: 22px;
     }
     
     .logo-icon {
