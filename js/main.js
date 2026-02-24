@@ -49,6 +49,41 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     animateElements.forEach(el => observer.observe(el));
+    
+    // Premium scroll reveal for all major sections
+    const revealElements = document.querySelectorAll(
+        '.section-header, .showcase-card, .service-card, .timeline-item, ' +
+        '.cta-section, .footer-grid, .page-header, .contact-hero-inner, ' +
+        '.contact-cards-grid, .contact-map, .app-card, .about-card, ' +
+        '.anim-fade-up'
+    );
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay || 0;
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, delay);
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    
+    revealElements.forEach((el, i) => {
+        // Only apply if not already styled by other animations
+        if (!el.style.opacity) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+        }
+        // Stagger siblings
+        const siblings = el.parentElement ? Array.from(el.parentElement.children) : [];
+        const sibIndex = siblings.indexOf(el);
+        el.dataset.delay = sibIndex * 100;
+        revealObserver.observe(el);
+    });
 });
 
 // Navbar scroll effect
