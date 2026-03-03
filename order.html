@@ -1185,18 +1185,18 @@
                 const dateStr = today.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
                 
                 let msg = '';
-                msg += `*SRI SAI STUDENT XEROX*%0A`;
-                msg += `Main St, beside Airtel store, Prasadampadu%0A`;
-                msg += `----------------------------%0A%0A`;
+                msg += `*SRI SAI STUDENT XEROX*\n`;
+                msg += `Main St, beside Airtel store, Prasadampadu\n`;
+                msg += `----------------------------\n\n`;
                 
-                msg += `*NEW ORDER REQUEST*%0A`;
-                msg += `Date: ${dateStr}%0A%0A`;
+                msg += `*NEW ORDER REQUEST*\n`;
+                msg += `Date: ${dateStr}\n\n`;
                 
-                msg += `----------------------------%0A`;
-                msg += `*SERVICE DETAILS*%0A`;
-                msg += `----------------------------%0A%0A`;
+                msg += `----------------------------\n`;
+                msg += `*SERVICE DETAILS*\n`;
+                msg += `----------------------------\n\n`;
                 
-                msg += `Service: ${serviceNames[selectedService]}%0A%0A`;
+                msg += `Service: ${serviceNames[selectedService]}\n\n`;
                 
                 if (selectedService === 'xerox') {
                     const printType = document.querySelector('input[name="print-type"]:checked');
@@ -1208,28 +1208,28 @@
                     if (!printType) { alert('Please select Black & White or Colour'); return; }
                     if (!printSide) { alert('Please select Single Side or Both Side'); return; }
                     
-                    msg += `Print Type: ${printType.value}%0A`;
-                    msg += `Printing: ${printSide.value}%0A`;
-                    msg += `No. of Pages: ${pages}%0A`;
-                    msg += `No. of Copies: ${copies}%0A`;
+                    msg += `Print Type: ${printType.value}\n`;
+                    msg += `Printing: ${printSide.value}\n`;
+                    msg += `No. of Pages: ${pages}\n`;
+                    msg += `No. of Copies: ${copies}\n`;
                     if (binding && binding.value !== 'No Binding') {
-                        msg += `Binding: ${binding.value}%0A`;
+                        msg += `Binding: ${binding.value}\n`;
                     } else {
-                        msg += `Binding: Not Required%0A`;
+                        msg += `Binding: Not Required\n`;
                     }
                     
                 } else if (selectedService === 'aadhaar') {
                     const updateType = document.querySelector('input[name="aadhaar-type"]:checked');
                     if (!updateType) { alert('Please select update type'); return; }
-                    msg += `Update Type: ${updateType.value}%0A`;
+                    msg += `Update Type: ${updateType.value}\n`;
                     
                     const docsContainer = document.getElementById('aadhaar-docs');
                     if (docsContainer && docsContainer.style.display !== 'none') {
                         const docItems = docsContainer.querySelectorAll('.info-box li');
                         if (docItems.length > 0) {
-                            msg += `%0ARequired Documents:%0A`;
+                            msg += `\nRequired Documents:\n`;
                             docItems.forEach(item => {
-                                msg += `- ${item.textContent.trim()}%0A`;
+                                msg += `- ${item.textContent.trim()}\n`;
                             });
                         }
                     }
@@ -1237,15 +1237,15 @@
                 } else if (selectedService === 'pan') {
                     const panType = document.querySelector('input[name="pan-type"]:checked');
                     if (!panType) { alert('Please select PAN service type'); return; }
-                    msg += `Service Type: ${panType.value}%0A`;
+                    msg += `Service Type: ${panType.value}\n`;
                     
                     const docsContainer = document.getElementById('pan-docs');
                     if (docsContainer && docsContainer.style.display !== 'none') {
                         const docItems = docsContainer.querySelectorAll('.info-box li');
                         if (docItems.length > 0) {
-                            msg += `%0ARequired Documents:%0A`;
+                            msg += `\nRequired Documents:\n`;
                             docItems.forEach(item => {
-                                msg += `- ${item.textContent.trim()}%0A`;
+                                msg += `- ${item.textContent.trim()}\n`;
                             });
                         }
                     }
@@ -1254,24 +1254,24 @@
                     const lamType = document.querySelector('input[name="lamination-type"]:checked');
                     const qty = document.getElementById('lamination-qty').value;
                     if (!lamType) { alert('Please select lamination size'); return; }
-                    msg += `Lamination Size: ${lamType.value}%0A`;
-                    msg += `Quantity: ${qty}%0A`;
+                    msg += `Lamination Size: ${lamType.value}\n`;
+                    msg += `Quantity: ${qty}\n`;
                     
                 } else if (selectedService === 'eapcet') {
                     const service = document.querySelector('input[name="eapcet-service"]:checked');
                     const state = document.querySelector('input[name="eapcet-state"]:checked');
                     if (!service) { alert('Please select service type'); return; }
                     if (!state) { alert('Please select state'); return; }
-                    msg += `Application Type: ${service.value}%0A`;
-                    msg += `State: ${state.value}%0A`;
+                    msg += `Application Type: ${service.value}\n`;
+                    msg += `State: ${state.value}\n`;
                     
                     const docsContainer = document.getElementById('eapcet-docs');
                     if (docsContainer && docsContainer.style.display !== 'none') {
                         const docItems = docsContainer.querySelectorAll('.info-box li');
                         if (docItems.length > 0) {
-                            msg += `%0ARequired Documents:%0A`;
+                            msg += `\nRequired Documents:\n`;
                             docItems.forEach(item => {
-                                msg += `- ${item.textContent.trim()}%0A`;
+                                msg += `- ${item.textContent.trim()}\n`;
                             });
                         }
                     }
@@ -1285,28 +1285,28 @@
                         if (!specified) { alert('Please specify the application'); return; }
                         serviceName = specified;
                     }
-                    msg += `Application: ${serviceName}%0A`;
+                    msg += `Application: ${serviceName}\n`;
                     
                     const docsContainer = document.getElementById('other-docs');
                     if (docsContainer && docsContainer.style.display !== 'none') {
                         const docItems = docsContainer.querySelectorAll('.info-box li');
                         if (docItems.length > 0) {
-                            msg += `%0ARequired Documents:%0A`;
+                            msg += `\nRequired Documents:\n`;
                             docItems.forEach(item => {
-                                msg += `- ${item.textContent.trim()}%0A`;
+                                msg += `- ${item.textContent.trim()}\n`;
                             });
                         }
                     }
                 }
                 
-                msg += `%0A----------------------------%0A`;
-                msg += `*CUSTOMER INFORMATION*%0A`;
-                msg += `----------------------------%0A%0A`;
-                msg += `Name: ${name}%0A`;
-                msg += `Mobile: ${phone}%0A`;
-                msg += `Preferred Pickup: ${formattedTime}%0A`;
+                msg += `\n----------------------------\n`;
+                msg += `*CUSTOMER INFORMATION*\n`;
+                msg += `----------------------------\n\n`;
+                msg += `Name: ${name}\n`;
+                msg += `Mobile: ${phone}\n`;
+                msg += `Preferred Pickup: ${formattedTime}\n`;
                 
-                msg += `%0A----------------------------%0A%0A`;
+                msg += `\n----------------------------\n\n`;
                 
                 if (selectedService === 'xerox') {
                     msg += `I will attach the document files (PDF/Images) in this chat. Please wait.`;
@@ -1314,7 +1314,10 @@
                     msg += `Kindly confirm the order and share the total charges. Thank you.`;
                 }
                 
-                msg += `%0A%0ASent via srisaistudentxerox.in`;
+                msg += `\n\nSent via srisaistudentxerox.in`;
+                
+                // Properly encode the entire message for URL
+                const encodedMsg = encodeURIComponent(msg);
                 
                 if (selectedService === 'xerox') {
                     // Show attachment reminder modal for xerox
@@ -1328,7 +1331,7 @@
                     
                     newBtn.addEventListener('click', function() {
                         modal.classList.remove('active');
-                        window.open(`https://wa.me/919000948781?text=${msg}`, '_blank');
+                        window.open(`https://wa.me/919000948781?text=${encodedMsg}`, '_blank');
                     });
                     
                     // Close modal on overlay click
@@ -1338,7 +1341,7 @@
                         }
                     });
                 } else {
-                    window.open(`https://wa.me/919000948781?text=${msg}`, '_blank');
+                    window.open(`https://wa.me/919000948781?text=${encodedMsg}`, '_blank');
                 }
             });
         })();
